@@ -3,10 +3,13 @@ package org.wecancodeit.virtualpet4;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.wecancodeit.virtualpet4.enums.PetTypeEnum;
+import org.wecancodeit.virtualpet4.enums.RoleEnum;
 import org.wecancodeit.virtualpet4.models.PetModel;
 import org.wecancodeit.virtualpet4.models.ShelterModel;
+import org.wecancodeit.virtualpet4.models.UserModel;
 import org.wecancodeit.virtualpet4.repositories.PetRepository;
 import org.wecancodeit.virtualpet4.repositories.ShelterRepository;
+import org.wecancodeit.virtualpet4.repositories.UserRepository;
 
 import jakarta.annotation.Resource;
 
@@ -17,14 +20,29 @@ public class Populator implements CommandLineRunner {
     private PetRepository petRepository;
     @Resource
     private ShelterRepository shelterRepository;
+    @Resource
+    private UserRepository userRepository;
 
-    public Populator(PetRepository petRepository, ShelterRepository shelterRepository) {
+    public Populator(UserRepository userRepository, PetRepository petRepository, ShelterRepository shelterRepository) {
         this.petRepository = petRepository;
         this.shelterRepository = shelterRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        UserModel user1 = new UserModel("Admin", "admin", "password", RoleEnum.ADMIN);
+        userRepository.save(user1);
+
+        UserModel user2 = new UserModel("Volunteer","volunteer","password",RoleEnum.VOLUNTEER);
+        userRepository.save(user2);
+
+        UserModel user3 = new UserModel("Manager","manager","password",RoleEnum.MANAGER);
+        userRepository.save(user3);
+
+        UserModel user4 = new UserModel("Guest","guest","password",RoleEnum.GUEST);
+        userRepository.save(user4);
+        
         ShelterModel shelter1 = new ShelterModel("Shelter 1", "1234567890", "shelter1@No.com");
         shelter1 = shelterRepository.save(shelter1);
         ShelterModel shelter2 = new ShelterModel("Shelter 2", "1234567890", "shelter2@No.com");
