@@ -21,6 +21,10 @@ const NavBar = () => {
         <nav className="container">
             <ul>
                 <li><Link to="/">Home</Link></li>
+<<<<<<< HEAD
+=======
+                <li>{isLoggedIn && <Link to='/shelters'>Shelters</Link>}</li>
+>>>>>>> 7d6f89bb899781de93a9eb7c98cd58eaa7f29678
             </ul>
             <ul>
                 <div>
