@@ -70,7 +70,10 @@ public class PetModel {
     }
 
     public long getShelter_id() {
-        return this.shelter.getId();
+        if (this.shelter == null) {
+            return shelter_id;
+        } else {
+            return this.shelter.getId();
+        }
     }
-
 }
